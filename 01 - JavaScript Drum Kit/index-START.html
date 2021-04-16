@@ -68,7 +68,17 @@
     if (!audio) return; //if no audio stops the function from running all together 
     audio.currentTime = 0; //rewinds to the beginning if sound hit again
     audio.play();
+    //add class of playing to the key div
+    key.classList.add('playing'); 
   })
+
+  const keys = document.querySelectorAll('.key'); 
+
+  //in JS you can't add event listeners to an array of keys, you must loop through each individual
+  //element in the array and explicity add an event listener
+
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition
+  )); 
 
 </script>
 
