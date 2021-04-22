@@ -68,6 +68,8 @@
       console.log(this.value);
       //set the value for each input equal to the value change 
       // --base = this.value 
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
     }
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate))
