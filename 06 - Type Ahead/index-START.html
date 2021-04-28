@@ -17,8 +17,10 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+//Step 2: set up your empty array for data from fetch request
 const cities = [];
 
+//Step 3: Make Fetch Request
 //fetch returns a promise
 //data that comes back doesn't know what it is 
 //therefore you need to call .json method on the promise
@@ -27,10 +29,14 @@ fetch(endpoint)
   .then(blob => blob.json())
   .then(data => cities.push(...data)) 
 
-  //create function to find matches 
+  //Step 4: Create function to find matches
+  //put a variable into the regulatr expression match
+  //create a variable outside the reg expression using new RegExp
 
 function findMatches(wordToMatch, cities) {
   return cities.filter(place => {
+    //create regex expression with variable to use in match method
+    //you cant just drop a variable in the regex expression as normal
     const regex = new RegExp(wordToMatch, 'gi');
     return place.city.match(regex) || place.state.match(regex)
     //figure out if the city or state matches what was searched 
@@ -43,7 +49,7 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-//display matches 
+//Step 5: display matches 
 
 function displayMatches() {
 
@@ -65,6 +71,7 @@ function displayMatches() {
 
 }
 
+//Step 1: declare your variables 
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
