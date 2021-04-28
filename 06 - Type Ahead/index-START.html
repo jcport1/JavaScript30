@@ -17,6 +17,52 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const cities = [];
+
+//fetch returns a promise
+//data that comes back doesn't know what it is 
+//therefore you need to call .json method on the promise
+//use spread operator so you don't have a nested array 
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data)) 
+
+  //create function to find matches 
+
+function findMatches(wordToMatch, cities) {
+  return cities.filter(place => {
+    const regex = new RegExp(wordToMatch, 'gi');
+    return place.city.match(regex) || place.state.match(regex)
+    //figure out if the city or state matches what was searched 
+  })
+}
+
+//display matches 
+
+function displayMatches() {
+
+  const matchArray = findMatches(this.value, cities); 
+  //hook up html
+  //turn array into a string using .join method
+  const html = matchArray.map(place => {
+    return `
+    <li> 
+      <span class="name">${place.city}, ${place.state}</span>
+      <span class="population">${place.population}</span> 
+    </li> 
+    `
+  }).join('')
+  suggestions.innerHTML = html; 
+
+}
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches)
+//tells us what the person is typing in the box
+searchInput.addEventListener('keyup', displayMatches)
+
 </script>
 </body>
 </html>
