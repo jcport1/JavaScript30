@@ -21,8 +21,9 @@
 
     //the negative makes it start from the back; we use minus one because we want
     //to be one spot over from the total length
+    //pushes whatever is up from the array when we go over 6 characters 
     pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length)
-    debugger 
+     
 
     if (pressed.join('').includes(secretCode)) {
       console.log('DING DING!')
