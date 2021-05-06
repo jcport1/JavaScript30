@@ -7,6 +7,29 @@
 </head>
 <body>
 <script>
+
+  const pressed = [];
+  const secretCode = 'webos'
+
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key)
+    //restrict maximum num of elements in the array to length of code
+    //use splice to remove elements at the beginning so you can add new ones
+    // syntax: slice(start) *till end || slice(start, end)
+    //starts at -secretCode.length - 1
+    //ends at whatever number of pressed spots are left
+
+    //the negative makes it start from the back; we use minus one because we want
+    //to be one spot over from the total length
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length)
+    debugger 
+
+    if (pressed.join('').includes(secretCode)) {
+      console.log('DING DING!')
+      cornify_add()
+    }
+  })
+
 </script>
 </body>
 </html>
