@@ -9,10 +9,25 @@
   <script>
     // start with strings, numbers and booleans
 
+    let age = 100;
+    let age2 = age;
+
+    console.log(age, age2);
+    //reassigned age will not change original age2
+    age = 200;
+    console.log(age, age2);
+
+    // same is true for strings
+
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+
+    const team = players;
+
+    console.log(players, team);
 
     // You might think we can just do something like this:
 
@@ -26,11 +41,20 @@
 
     // So, how do we fix this? We take a copy instead!
 
-    // one way
 
+    // one way
+    const team2 = players.slice();
     // or create a new array and concat the old one in
 
+    const team3 = [].concat(players);
+
     // or use the new ES6 Spread
+
+    const team4 = [...players];
+
+    const team4 = Array.from(players)
+
+
 
     // now when we update it, the original one isn't changed
 
@@ -44,11 +68,40 @@
 
     // and think we make a copy:
 
+    const captain = person;
+    captain.number = 99;
+
     // how do we take a copy instead?
+
+    const cap2 = Object.assign({}, person, { number: 99 })
 
     // We will hopefully soon see the object ...spread
 
+    const cap3 = {...person};
+
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const jeff = {
+      name: 'Jeff',
+      age: 100,
+      social: {
+        twitter: '@jeff',
+        facebook: 'jeff'
+      }
+    }
+
+    const dev = Object.assign({}, jeff)
+
+    dev.social.twitter = '@coolman'
+
+    // will change the original object too, so you'll need to find an external function (deep clone),
+    // but ask yourself first why you need to do this (go another layer deep)
+
+    // trick
+    // Poor man's version of deep clone
+    
+    // converts to string first then back to object and shakes off references
+    const dev2 = JSON.parse(JSON.stringify(jeff))
 
   </script>
 
